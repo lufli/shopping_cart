@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="store">
+	<head>
+		<title> ng-cribs </title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.css" />
+		<script src="angular.min.js"></script>
+		<script src="app.js"></script>
+	</head>
+	<body>
+		<div ng-controller="StoreController as store" class="container">
+			<h1>{{test}}</h1>
+			<div>
+				<table class="table" ng-show="cart.length">
+		<thead>
+				<tr>
+						<th>Product No</th>
+						<th>Product Name</th>
+						<th>Product Quantity</th>
+						<th>Product Price</th>
+						<th>Amount Price</th>
+						<th>Control</th>
+				</tr>
+		</thead>
+		<tbody>
+				<tr ng-repeat="item in cart">
+						<td>{{item.id}}</td>
+						<td>{{item.name}}</td>
+						<td>
+								<button type="button" ng-click="minus(item.id)" class="btn btn-primary">-</button>
+								<input type="number" min="0" value="{{item.quantity}}" ng-model="item.quantity">
+								<button type="button" ng-click="add(item.id)" class="btn btn-primary">+</button>
+
+						</td>
+						<td>{{item.price}}</td>
+						<td>{{item.price * item.quantity}}</td>
+						<td>
+								<button type="button" ng-click="remove(item.id)" class="btn btn-danger">Delete</button>
+						</td>
+				</tr>
+				<tr>
+						<td>
+								The total Price:
+						</td>
+						<td>
+								{{totalPrice()}}
+						</td>
+						<td>
+								The total Quantities:
+						</td>
+						<td>
+								{{totalQuantity()}}
+						</td>
+						<td colspan="2">
+								<button type="button" ng-click="cart={}" class="btn btn-danger">Clear the shopping cart</button>
+						</td>
+				</tr>
+		</tbody>
+</table>
+			</div>
+			<div>
+				<form>
+					<label>Item Id: <input type="text" ng-model="newItem.id" /></label>
+					<label>Item Name: <input type="text" ng-model="newItem.name" /></label>
+					<label>Item Quantity: <input type="number" min="0" ng-model="newItem.quantity" /></label>
+					<label>Item Price: <input type="number" min="0" ng-model="newItem.price" /></label>
+					<button type="submit" class="btn btn-primary" ng-click="addItem(newItem)" value="Add Item">Add Item</button>
+				</form>
+			</div>
+			<!-- <table class="table" ng-show="cart.length">
+				<thead>
+					<tr>
+						<th>Product No</th>
+						<th>Product Name</th>
+						<th>Product Quantity</th>
+						<th>Product Price</th>
+						<th>Amount Price</th>
+						<th>Control</th>
+					</tr>
+				</thead>
+			</table> -->
+		</div>
+	</body>
+</html>
